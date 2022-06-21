@@ -1,15 +1,18 @@
 package tests.drivers;
 
 import com.codeborne.selenide.WebDriverProvider;
+import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import tests.config.UserConfig;
 
 import java.net.MalformedURLException;
 import java.net.URL;
 
 public class BrowserStackMobileDriver implements WebDriverProvider {
+    static UserConfig config = ConfigFactory.create(UserConfig.class);
 
     @Override
     public WebDriver createDriver(Capabilities capabilities) {
@@ -17,15 +20,16 @@ public class BrowserStackMobileDriver implements WebDriverProvider {
         mutableCapabilities.merge(capabilities);
 
         // Set your access credentials
-        mutableCapabilities.setCapability("browserstack.user", "bsuser_RvHAli");
-        mutableCapabilities.setCapability("browserstack.key", "ByoQX8zuqNqVeZzFVDKJ");
+        mutableCapabilities.setCapability("browserstack.user", config.login());
+        mutableCapabilities.setCapability("browserstack.key", config.password());
 
         // Set URL of the application under test
-        mutableCapabilities.setCapability("app", "bs://c700ce60cf13ae8ed97705a55b8e022f13c5827c");
+// old       mutableCapabilities.setCapability("app", "bs://c700ce60cf13ae8ed97705a55b8e022f13c5827c");
+        mutableCapabilities.setCapability("app", "bs://" + config.urlRemotePhone());
 
         // Specify device and os_version for testing
-        mutableCapabilities.setCapability("device", "Google Pixel 3");
-        mutableCapabilities.setCapability("os_version", "9.0");
+        mutableCapabilities.setCapability("device", config.phone());
+        mutableCapabilities.setCapability("os_version", config.modelPhone());
 
         // Set other BrowserStack capabilities
         mutableCapabilities.setCapability("project", "QA GURU Zyryanovvm Mobile Tests");

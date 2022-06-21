@@ -1,15 +1,18 @@
 package tests;
 
 import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.Selenide;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import tests.drivers.BrowserStackMobileDriver;
+import tests.helpers.Attach;
 
-import static com.codeborne.selenide.Selenide.closeWebDriver;
 import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.logevents.SelenideLogger.addListener;
+import static io.qameta.allure.Allure.step;
+import static tests.helpers.Attach.sessionId;
 
 public class TestBase {
 
@@ -27,7 +30,14 @@ public class TestBase {
 
     @AfterEach
     public void afterEach() {
-        closeWebDriver();
+        String sessionId = sessionId();
+
+        Attach.screenshotAs("Last screenshot");
+        Attach.pageSource();
+
+        step("Close driver", Selenide::closeWebDriver);
+
+        Attach.video(sessionId);
     }
 
 }
