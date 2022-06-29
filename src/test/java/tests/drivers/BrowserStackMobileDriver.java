@@ -6,13 +6,13 @@ import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
-import tests.config.UserConfig;
+import tests.config.BrowserstackConfig;
 
 import java.net.MalformedURLException;
 import java.net.URL;
 
 public class BrowserStackMobileDriver implements WebDriverProvider {
-    static UserConfig config = ConfigFactory.create(UserConfig.class);
+    static BrowserstackConfig config = ConfigFactory.create(BrowserstackConfig.class);
 
     @Override
     public WebDriver createDriver(Capabilities capabilities) {
