@@ -8,6 +8,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import tests.drivers.BrowserStackMobileDriver;
 import tests.drivers.EmulationMobileDriver;
+import tests.drivers.RealMobileDriver;
+import tests.drivers.SelenoidMobileDriver;
 import tests.helpers.Attach;
 
 import static com.codeborne.selenide.Selenide.open;
@@ -16,7 +18,7 @@ import static io.qameta.allure.Allure.step;
 import static tests.helpers.Attach.sessionId;
 
 public class TestBase {
-    static String driver = System.getProperty("deviceHost", "");
+    static String driver = System.getProperty("deviceHost", "emulation");
 
     @BeforeAll
     public static void setup() {
@@ -25,9 +27,9 @@ public class TestBase {
         } else if (driver.equals("emulation")) {
             Configuration.browser = EmulationMobileDriver.class.getName();
         } else if (driver.equals("real")) {
-            Configuration.browser = BrowserStackMobileDriver.class.getName();
+            Configuration.browser = RealMobileDriver.class.getName();
         } else if (driver.equals("selenoid")) {
-            Configuration.browser = BrowserStackMobileDriver.class.getName();
+            Configuration.browser = SelenoidMobileDriver.class.getName();
         }
         Configuration.browserSize = null;
     }
