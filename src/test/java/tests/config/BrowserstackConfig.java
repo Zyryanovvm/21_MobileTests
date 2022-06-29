@@ -3,9 +3,9 @@ package tests.config;
 import org.aeonbits.owner.Config;
 
 @Config.Sources({
-        "classpath:user.properties"
+        "classpath:browserstack.properties"
 })
-public interface UserConfig extends Config {
+public interface BrowserstackConfig extends Config {
 
     @Key("login")
     String login();

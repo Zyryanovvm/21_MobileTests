@@ -13,6 +13,7 @@ public class NewWikiSearchTests extends TestBase {
     @Test
     void searchTest() {
         back();
+//        switchTo().alert().accept(); - Команда на закрытие системных всплывающих окон
         step("Type search", () -> {
             $(AppiumBy.id("org.wikipedia.alpha:id/search_container")).click();
             $(AppiumBy.id("org.wikipedia.alpha:id/search_src_text"))
@@ -38,6 +39,31 @@ public class NewWikiSearchTests extends TestBase {
             String actualText = $$(AppiumBy.id("org.wikipedia.alpha:id/page_list_item_title"))
                     .first().text();
             assertThat(actualText).isEqualTo("Konstantin Zyryanov");
+        });
+
+    }
+
+    @Test
+    void searchInfoWiki() {
+        back();
+        step("", () -> {
+            $(AppiumBy.id("org.wikipedia.alpha:id/search_container")).click();
+            $(AppiumBy.id("org.wikipedia.alpha:id/search_src_text"))
+                    .sendKeys("Zyryanov");
+        });
+
+        step("Assert textView", () -> {
+            String actualText = $$(AppiumBy.id("org.wikipedia.alpha:id/page_list_item_title"))
+                    .first().text();
+            assertThat(actualText).isEqualTo("Konstantin Zyryanov");
+        });
+
+        step("", () -> {
+            $$(AppiumBy.id("org.wikipedia.alpha:id/page_list_item_title"))
+                    .first().click();
+            String actualPage = $(AppiumBy.id("org.wikipedia.alpha:id/tabsCountText"))
+                    .text();
+            assertThat(actualPage).isEqualTo("1");
         });
 
     }
