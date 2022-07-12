@@ -7,18 +7,18 @@ import org.aeonbits.owner.Config;
 })
 public interface BrowserstackConfig extends Config {
 
-    @Key("login")
-    String login();
+    @Key("user")
+    String user();
 
-    @Key("password")
-    String password();
+    @Key("key")
+    String key();
 
-    @Key("urlRemotePhone")
-    String urlRemotePhone();
+    @Key("urlApp")
+    String urlApp();
 
-    @Key("phone")
-    String phone();
+    @Key("deviceName")
+    String deviceName();
 
-    @Key("modelPhone")
-    String modelPhone();
+    @Key("androidVersion")
+    String androidVersion();
 }
